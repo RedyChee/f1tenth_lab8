@@ -15,7 +15,7 @@ import sys
 
 
 
-
+from cv_bridge import CvBridge, CvBridgeError
 import os
 import time
 import cv2
@@ -90,8 +90,8 @@ def detect(img):
     augment = 'store_true'
     conf_thres = 0.3
     iou_thres = 0.45
-    # ppl, bagpack, umbrella, bottle, cup, cellphone
-    classes = (0,24,25,39,41,67)
+    # ppl, bagpack, bottle, cellphone
+    classes = (0,24,39,67)
     agnostic_nms = 'store_true'
     img = torch.zeros((1, 3, imgsz, imgsz), device=device)  # init img
     _ = model(img.half() if half else img) if device.type != 'cpu' else None  # run once
@@ -155,18 +155,23 @@ def image_callback_1(image):
     with torch.no_grad():
         detect(ros_image)
 def publish_image(imgdata):
-    image_temp=Image()
-    header = Header(stamp=rospy.Time.now())
-    header.frame_id = 'map'
-    image_temp.height=IMAGE_HEIGHT
-    image_temp.width=IMAGE_WIDTH
-    image_temp.encoding='rgb8'
-    image_temp.data=np.array(imgdata).tostring()
-    #print(imgdata)
-    #image_temp.is_bigendian=True
-    image_temp.header=header
-    image_temp.step=1241*3
-    image_pub.publish(image_temp)
+		bridge = CvBridge()
+		try:
+			image_pub.publish(bridge.cv2_to_imgmsg(imgdata, "rgb8"))
+		except CvBridgeError as e:
+			print(e)
+#    image_temp=Image()
+#    header = Header(stamp=rospy.Time.now())
+#    header.frame_id = 'map'
+#    image_temp.height=IMAGE_HEIGHT
+#    image_temp.width=IMAGE_WIDTH
+#    image_temp.encoding='rgb8'
+#    image_temp.data=np.array(imgdata).tostring()
+#    #print(imgdata)
+#    #image_temp.is_bigendian=True
+#    image_temp.header=header
+#    image_temp.step=1241*3
+#    image_pub.publish(image_temp)
 
 
 if __name__ == '__main__':

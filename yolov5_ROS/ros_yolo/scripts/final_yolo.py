@@ -11,7 +11,7 @@ IMAGE_WIDTH=1241
 IMAGE_HEIGHT=376
 
 import sys
-#sys.path.remove('/opt/ros/kinetic/lib/python2.7/dist-packages')
+# sys.path.remove('/opt/ros/noetic/lib/python2.7/dist-packages')
 
 
 

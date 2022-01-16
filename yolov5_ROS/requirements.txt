@@ -1,0 +1,9 @@
+rospkg
+opencv_python
+torch
+Pillow
+tqdm
+matplotlib
+scipy
+torchvision
+netifaces

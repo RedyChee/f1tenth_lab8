@@ -90,8 +90,8 @@ def detect(img):
     augment = 'store_true'
     conf_thres = 0.3
     iou_thres = 0.45
-    # ppl, bagpack, bottle, cellphone
-    classes = (0,24,39,67)
+    # bagpack, bottle, cellphone
+    classes = (0) # 24, 39, 67
     agnostic_nms = 'store_true'
     img = torch.zeros((1, 3, imgsz, imgsz), device=device)  # init img
     _ = model(img.half() if half else img) if device.type != 'cpu' else None  # run once

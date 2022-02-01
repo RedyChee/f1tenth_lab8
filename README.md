@@ -2,10 +2,7 @@
 - compare performance for both April Tag (id 0) and YOLOv5 model in terms of their detection accuracy, average speed of detection and their memory requirements.
 
 ## Equipments
--	The experiments are tested using a logitech webcam C922 (1920x1080 resolution and 30 fps) laptop with specs:
-  - i7-1165G7
-  - 16GB RAM
-  - NVIDIA GeForce MX450
+-	The experiments are tested using a logitech webcam C922 (1920x1080 resolution and 30 fps) and a laptop with i7-1165G7, 16GB RAM and NVIDIA GeForce MX450.
   
 ## Accuracy vs Distance
 ### April Tag
